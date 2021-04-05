@@ -14,5 +14,5 @@ const int King::value() const {
 }
 
 void King::display(std::ostream& outStream) const {
-    outStream << Piece::color() << "R";
+    outStream << Piece::color() << "K";
 }

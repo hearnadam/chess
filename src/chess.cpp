@@ -1,5 +1,5 @@
+// #include <string>
 #include <iostream>
-#include <string>
 #include "Board.h"
 #include "Square.h"
 
@@ -36,8 +36,8 @@ int main(int argc, char* argv[]) {
     BOARD.squareAt(0,7).setOccupier(new Rook(BLACK));
     BOARD.squareAt(1,7).setOccupier(new Knight(BLACK));
     BOARD.squareAt(2,7).setOccupier(new Bishop(BLACK));
-    BOARD.squareAt(3,7).setOccupier(new King(BLACK));
-    BOARD.squareAt(4,7).setOccupier(new Queen(BLACK));
+    BOARD.squareAt(3,7).setOccupier(new Queen(BLACK));
+    BOARD.squareAt(4,7).setOccupier(new King(BLACK));
     BOARD.squareAt(5,7).setOccupier(new Bishop(BLACK));
     BOARD.squareAt(6,7).setOccupier(new Knight(BLACK));
     BOARD.squareAt(7,7).setOccupier(new Rook(BLACK));
@@ -46,6 +46,7 @@ int main(int argc, char* argv[]) {
         BOARD.squareAt(i,6).setOccupier(new Pawn(BLACK));
     }
 
+    // Display Board to cout.
     BOARD.display(std::cout);
 
     return EXIT_SUCCESS;
