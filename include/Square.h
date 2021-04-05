@@ -9,18 +9,59 @@ class Piece;
 
 class Square { 
     public:
+        /**
+         * @brief Construct a new Square object with x & y given.
+         * 
+         * @param x row.
+         * @param y column.
+         */
         Square(int x, int y);
 
+
+        /**
+         * @brief Destroy the Square object.
+         */
         ~Square() = default;
 
+
+        /**
+         * @brief Set the Square's occupier.
+         * 
+         * @param piece pointer to a piece object.
+         */
         void setOccupier(Piece* piece);
 
+
+        /**
+         * @brief Get x.
+         * 
+         * @return const int x.
+         */
         const int getX() const;
 
+
+        /**
+         * @brief Get y.
+         * 
+         * @return const int y.
+         */
         const int getY() const;
 
+
+        /**
+         * @brief Returns true if square is occupied.
+         * 
+         * @return true if square is occupied.
+         * @return false if square is not occupied.
+         */
         const bool occupied() const;
 
+
+        /**
+         * @brief Returns a reference to the square's occupant.
+         * 
+         * @return Piece& a reference to the square's occupant.
+         */
         Piece& occupiedBy() const;
 
     private:
