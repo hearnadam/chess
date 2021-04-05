@@ -15,7 +15,7 @@ class King: public RestrictedPiece {
         /**
          * @brief Destroy the King object.
          */
-        virtual ~King();
+        virtual ~King() = default;
 
         /**
          * @brief Returns true if the king can move to the square passed in.
@@ -40,5 +40,5 @@ class King: public RestrictedPiece {
          */
         virtual void display(std::ostream& outStream) const;
 
-};
+}; // King
 #endif

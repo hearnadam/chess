@@ -15,7 +15,7 @@ class Knight: public Piece {
         /**
          * @brief Destroy the Knight object.
          */
-        virtual ~Knight();
+        virtual ~Knight() = default;
 
         /**
          * @brief Returns true if the knight can move to the square passed in.
@@ -40,5 +40,5 @@ class Knight: public Piece {
          */
         virtual void display(std::ostream& outStream) const;
 
-};
+}; // Knight
 #endif

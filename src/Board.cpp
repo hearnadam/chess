@@ -4,23 +4,25 @@
 
 // Constructor
 Board::Board() {
-   for (int i = 0; i < _DIMENSION; i++) {
-       for (int j = 0; j < _DIMENSION; j++) {
-           _board[i][j] = new Square(j, i);
+    for (int i = 0; i < _DIMENSION; i++) {
+        std::vector<Square*> v;
+        for (int j = 0; j < _DIMENSION; j++) {
+            v.push_back(new Square(j, i));
        }
-   }
+       _squares.push_back(v);
+    }
 }
 
 
 // Accessors
 Square& Board::squareAt(int x, int y) const {
-    return *_board[y][x];
+    return *_squares.at(y).at(x);
 }
 
 
 Square& Board::squareAt(std::string location) const {
     // TODO
-    return *_board[0][0];
+    return *_squares.at(0).at(0);
 }
 
 
@@ -49,9 +51,9 @@ void Board::display(std::ostream& outStream) const {
         outStream << "  -----------------------------------------" << std::endl;
         outStream << _DIMENSION - i << " |";
         for (int j = 0; j < _DIMENSION; j++) {
-            if (_board[i][j] -> occupied()) {
+            if (_squares[i][j] -> occupied()) {
                 outStream << " ";
-                Piece& occupant = _board[i][j] -> occupiedBy();
+                Piece& occupant = _squares[i][j] -> occupiedBy();
                 occupant.display(outStream);
                 outStream << " ";
             } else {
@@ -68,7 +70,6 @@ void Board::display(std::ostream& outStream) const {
 
 
 Board& Board::getBoard() {
-   // Return the board
     return _the_board;
 }
 

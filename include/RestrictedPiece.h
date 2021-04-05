@@ -15,7 +15,7 @@ class RestrictedPiece: public Piece {
         /**
          * @brief Destroy the RestrictedPiece object.
          */
-        virtual ~RestrictedPiece();
+        virtual ~RestrictedPiece() = default;
 
         /**
          * @brief Move this piece to the square specified if possible.
@@ -41,5 +41,5 @@ class RestrictedPiece: public Piece {
     private:
         // boolean to keep track if RestrictedPiece has moved.
         bool _moved;
-};
+}; // RestrictedPiece
 #endif

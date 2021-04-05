@@ -15,7 +15,7 @@ class Rook: public RestrictedPiece {
         /**
          * @brief Destroy the Rook object.
          */
-        virtual ~Rook();
+        virtual ~Rook() = default;
 
         /**
          * @brief Returns true if the rook can move to the square passed in.
@@ -40,5 +40,5 @@ class Rook: public RestrictedPiece {
          */
         virtual void display(std::ostream& outStream) const;
 
-};
+}; // Rook
 #endif

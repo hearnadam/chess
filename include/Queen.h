@@ -15,7 +15,7 @@ class Queen: public Piece {
         /**
          * @brief Destroy the Queen object.
          */
-        virtual ~Queen();
+        virtual ~Queen() = default;
 
         /**
          * @brief Returns true if the queen can move to the square passed in.
@@ -40,5 +40,5 @@ class Queen: public Piece {
          */
         virtual void display(std::ostream& outStream) const;
 
-};
+}; // Queen
 #endif

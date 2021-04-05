@@ -4,6 +4,7 @@
 class Square;
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Board {
    public:
@@ -71,22 +72,18 @@ class Board {
       void display(std::ostream& outStream) const;
 
    private:
-
-      // Constructor is private for singleton pattern
-
       /*
-       * Create a Board with the given dimension
-       *
-       * @param dimension  size of the board (i.e., NxN)
+       * Private constructor for singleton pattern.
        */
       Board();
 
       // Static class variables, one to hold the lone board and another to
-      // define the default dimensions
+      // define the board dimensions
       static Board _the_board;
       static const int _DIMENSION = 8;
 
-      // A vector of vector of Piece for the board
-      Square* _board[_DIMENSION][_DIMENSION];
+      // A vector of vector of Square pointers for the board
+      std::vector< std::vector<Square*> > _squares;
+
 }; // Board
 #endif

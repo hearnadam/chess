@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Board.h"
 #include "Square.h"
+#include "Player.h"
 
 #include "Pawn.h"
 #include "Rook.h"
@@ -10,41 +11,43 @@
 #include "Queen.h"
 #include "King.h"
 
-
-int main(int argc, char* argv[]) {
-    const Board& BOARD = Board::getBoard();
+void setupBoard(Board& board) {
     const std::string WHITE = "W";
     const std::string BLACK = "B";
 
-
     // Setup White Pieces
-    BOARD.squareAt(0,0).setOccupier(new Rook(WHITE));
-    BOARD.squareAt(1,0).setOccupier(new Knight(WHITE));
-    BOARD.squareAt(2,0).setOccupier(new Bishop(WHITE));
-    BOARD.squareAt(3,0).setOccupier(new Queen(WHITE));
-    BOARD.squareAt(4,0).setOccupier(new King(WHITE));
-    BOARD.squareAt(5,0).setOccupier(new Bishop(WHITE));
-    BOARD.squareAt(6,0).setOccupier(new Knight(WHITE));
-    BOARD.squareAt(7,0).setOccupier(new Rook(WHITE));
+    board.squareAt(0,0).setOccupier(new Rook(WHITE));
+    board.squareAt(1,0).setOccupier(new Knight(WHITE));
+    board.squareAt(2,0).setOccupier(new Bishop(WHITE));
+    board.squareAt(3,0).setOccupier(new Queen(WHITE));
+    board.squareAt(4,0).setOccupier(new King(WHITE));
+    board.squareAt(5,0).setOccupier(new Bishop(WHITE));
+    board.squareAt(6,0).setOccupier(new Knight(WHITE));
+    board.squareAt(7,0).setOccupier(new Rook(WHITE));
 
     for (int i = 0; i < 8; i++) {
-        BOARD.squareAt(i,1).setOccupier(new Pawn(WHITE));
+        board.squareAt(i,1).setOccupier(new Pawn(WHITE));
     }
 
 
     // Setup Black Pieces
-    BOARD.squareAt(0,7).setOccupier(new Rook(BLACK));
-    BOARD.squareAt(1,7).setOccupier(new Knight(BLACK));
-    BOARD.squareAt(2,7).setOccupier(new Bishop(BLACK));
-    BOARD.squareAt(3,7).setOccupier(new Queen(BLACK));
-    BOARD.squareAt(4,7).setOccupier(new King(BLACK));
-    BOARD.squareAt(5,7).setOccupier(new Bishop(BLACK));
-    BOARD.squareAt(6,7).setOccupier(new Knight(BLACK));
-    BOARD.squareAt(7,7).setOccupier(new Rook(BLACK));
+    board.squareAt(0,7).setOccupier(new Rook(BLACK));
+    board.squareAt(1,7).setOccupier(new Knight(BLACK));
+    board.squareAt(2,7).setOccupier(new Bishop(BLACK));
+    board.squareAt(3,7).setOccupier(new Queen(BLACK));
+    board.squareAt(4,7).setOccupier(new King(BLACK));
+    board.squareAt(5,7).setOccupier(new Bishop(BLACK));
+    board.squareAt(6,7).setOccupier(new Knight(BLACK));
+    board.squareAt(7,7).setOccupier(new Rook(BLACK));
 
     for (int i = 0; i < 8; i++) {
-        BOARD.squareAt(i,6).setOccupier(new Pawn(BLACK));
+        board.squareAt(i,6).setOccupier(new Pawn(BLACK));
     }
+}
+
+int main(int argc, char* argv[]) {
+    Board& BOARD = Board::getBoard();
+    setupBoard(BOARD);
 
     // Display Board to cout.
     BOARD.display(std::cout);

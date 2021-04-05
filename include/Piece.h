@@ -18,7 +18,7 @@ class Piece {
         /**
          * @brief Destroy the Piece object.
          */
-        virtual ~Piece();
+        virtual ~Piece() = default;
 
         /**
          * @brief Set the square the piece is on.
@@ -85,11 +85,16 @@ class Piece {
         virtual void display(std::ostream& outStream) const = 0;
 
     private:
+        // TODO: Comment
+        /**
+         * @brief Construct a new Piece object
+         */
+        Piece() = default;
         // The string representation of the piece color.
         const std::string _color;
 
         // Where the piece things it is.
         Square* _square;
 
-};
+}; // Piece
 #endif

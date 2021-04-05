@@ -15,7 +15,7 @@ class Bishop: public Piece {
         /**
          * @brief Destroy the Bishop object.
          */
-        virtual ~Bishop();
+        virtual ~Bishop() = default;
 
         /**
          * @brief Returns true if the bishop can move to the square passed in.
@@ -40,5 +40,5 @@ class Bishop: public Piece {
          */
         virtual void display(std::ostream& outStream) const;
 
-};
+}; // Bishop
 #endif

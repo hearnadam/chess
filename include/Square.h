@@ -1,5 +1,5 @@
 /*
- * TODO: A bogus Square class just for compilation purposes
+ * TODO: Fix Comments
  */
 #ifndef SQUARE_H
 #define SQUARE_H
@@ -11,7 +11,7 @@ class Square {
     public:
         Square(int x, int y);
 
-        ~Square();
+        ~Square() = default;
 
         void setOccupier(Piece* piece);
 
@@ -24,8 +24,17 @@ class Square {
         Piece& occupiedBy() const;
 
     private:
+        /**
+         * @brief Private constructor to prevent compiler from creating a public one.
+         */
+        Square() = default;
+
+        // row
         int _x;
+        // column
         int _y;
+
+        // Reference to the piece that occupies this Square.
         Piece* _occupant;
-};
+}; // Square
 #endif

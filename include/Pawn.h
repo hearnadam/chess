@@ -50,5 +50,5 @@ class Pawn: public RestrictedPiece {
     private:
         Piece* _delegate = nullptr;
 
-};
+}; // Pawn
 #endif
