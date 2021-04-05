@@ -1,14 +1,21 @@
 // #include <string>
 #include <iostream>
+
+// Classes that support Game behavior.
 #include "Board.h"
 #include "Square.h"
 #include "Player.h"
 
-#include "Pawn.h"
-#include "Rook.h"
+// Piece classes
+// #include "Piece.h"
+#include "Queen.h"
 #include "Knight.h"
 #include "Bishop.h"
-#include "Queen.h"
+
+// RestrictedPiece classes
+// #include "RestrictedPiece.h"
+#include "Rook.h"
+#include "Pawn.h"
 #include "King.h"
 
 void setupBoard(Board& board) {
@@ -47,6 +54,8 @@ void setupBoard(Board& board) {
 
 int main(int argc, char* argv[]) {
     Board& BOARD = Board::getBoard();
+
+    // Initilize board and pieces state.
     setupBoard(BOARD);
 
     // Display Board to cout.

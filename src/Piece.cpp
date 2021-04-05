@@ -3,9 +3,6 @@
 Piece::Piece(std::string color):_color(color), _square(nullptr){}
 
 
-Piece::~Piece() {}
-
-
 void Piece::setLocation(Square* square) {
     _square = square;
 }

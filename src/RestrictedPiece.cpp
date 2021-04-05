@@ -2,7 +2,6 @@
 
 RestrictedPiece::RestrictedPiece(std::string color):Piece(color), _moved(false){}
 
-RestrictedPiece::~RestrictedPiece() {}
 
 bool RestrictedPiece::moveTo(Player& byPlayer, Square& to) {
     bool moved = Piece::moveTo(byPlayer, to);
@@ -11,6 +10,7 @@ bool RestrictedPiece::moveTo(Player& byPlayer, Square& to) {
     }
     return moved;
 }
+
 
 const bool RestrictedPiece::hasMoved() const {
     return _moved;
