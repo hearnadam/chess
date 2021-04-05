@@ -72,18 +72,18 @@ class Board {
       void display(std::ostream& outStream) const;
 
    private:
-      /*
-       * Private constructor for singleton pattern.
-       */
-      Board();
+        /*
+        * Private constructor for singleton pattern.
+        */
+        Board();
 
-      // Static class variables, one to hold the lone board and another to
-      // define the board dimensions
-      static Board _the_board;
-      static const int _DIMENSION = 8;
+        // Static class variables, one to hold the lone board and another to
+        // define the board dimensions
+        static Board _the_board;
+        static const int _DIMENSION = 8;
 
-      // A vector of vector of Square pointers for the board
-      std::vector< std::vector<Square*> > _squares;
+        // A vector of vector of Square pointers for the board
+        std::vector< std::vector<Square*> > _squares;
 
 }; // Board
 #endif
