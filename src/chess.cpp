@@ -37,6 +37,14 @@ void setupBoard(Board& board) {
         board.squareAt(i,1).setOccupier(new Pawn(WHITE));
     }
 
+    // Set White Piece Locations
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 8; j++) {
+            Square& aSquare = board.squareAt(j,i);
+            aSquare.occupiedBy().setLocation(&aSquare);
+        }
+    }
+
 
     // Setup Black Pieces
     board.squareAt(0,7).setOccupier(new Rook(BLACK));
@@ -50,6 +58,14 @@ void setupBoard(Board& board) {
 
     for (int i = 0; i < 8; i++) {
         board.squareAt(i,6).setOccupier(new Pawn(BLACK));
+    }
+
+    // Set White Piece Locations
+    for (int i = 6; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            Square& aSquare = board.squareAt(j,i);
+            aSquare.occupiedBy().setLocation(&aSquare);
+        }
     }
 }
 
