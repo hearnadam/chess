@@ -5,11 +5,11 @@
 // Constructor
 Board::Board() {
     for (int i = 0; i < _DIMENSION; i++) {
-        std::vector<Square*> v;
+        std::vector<Square*> column;
         for (int j = 0; j < _DIMENSION; j++) {
-            v.push_back(new Square(j, i));
+            column.push_back(new Square(j, i));
        }
-       _squares.push_back(v);
+       _squares.push_back(column);
     }
 }
 

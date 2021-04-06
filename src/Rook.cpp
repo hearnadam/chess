@@ -4,6 +4,7 @@ Rook::Rook(std::string color):RestrictedPiece(color) {}
 
 
 bool Rook::canMoveTo(Square& location) const {
+    // TODO
     return false;
 }
 

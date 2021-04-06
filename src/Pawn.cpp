@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(std::string color):RestrictedPiece(color) {}
+Pawn::Pawn(std::string color):RestrictedPiece(color), _delegate(nullptr) {}
 
 Pawn::~Pawn() {
     // TODO: Take care of delegate

@@ -4,6 +4,7 @@ Queen::Queen(std::string color):Piece(color) {}
 
 
 bool Queen::canMoveTo(Square& location) const {
+    // TODO
     return false;
 }
 

@@ -1,4 +1,4 @@
-// #include <string>
+#include <string>
 #include <iostream>
 
 // Classes that support Game behavior.
@@ -7,13 +7,13 @@
 #include "Player.h"
 
 // Piece classes
-// #include "Piece.h"
+// #include "Piece.h" // TODO: Remove?
 #include "Queen.h"
 #include "Knight.h"
 #include "Bishop.h"
 
 // RestrictedPiece classes
-// #include "RestrictedPiece.h"
+// #include "RestrictedPiece.h" // TODO: Remove?
 #include "Rook.h"
 #include "Pawn.h"
 #include "King.h"
@@ -21,6 +21,7 @@
 void setupBoard(Board& board) {
     const std::string WHITE = "W";
     const std::string BLACK = "B";
+
 
     // Setup White Pieces
     board.squareAt(0,0).setOccupier(new Rook(WHITE));

@@ -4,6 +4,7 @@ King::King(std::string color):RestrictedPiece(color) {}
 
 
 bool King::canMoveTo(Square& location) const {
+    // TODO
     return false;
 }
 

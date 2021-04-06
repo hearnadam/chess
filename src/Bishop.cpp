@@ -4,6 +4,7 @@ Bishop::Bishop(std::string color):Piece(color) {}
 
 
 bool Bishop::canMoveTo(Square& location) const {
+    // TODO
     return false;
 }
 

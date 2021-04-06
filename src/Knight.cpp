@@ -4,6 +4,7 @@ Knight::Knight(std::string color):Piece(color) {}
 
 
 bool Knight::canMoveTo(Square& location) const {
+    // TODO
     return false;
 }
 
