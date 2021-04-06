@@ -45,25 +45,37 @@ bool Board::isClearDiagonal(Square& from, Square& to) const {
 
 
 void Board::display(std::ostream& outStream) const {
-   // Iterate over the squares and display them
+    // Output top letters
     outStream << "    a    b    c    d    e    f    g    h" << std::endl;
-    for (int i = _DIMENSION - 1; i >= 0; i--) {
+    for (int column = _DIMENSION - 1; column >= 0; column--) {
         outStream << "  -----------------------------------------" << std::endl;
-        outStream << _DIMENSION - i << " |";
-        for (int j = 0; j < _DIMENSION; j++) {
-            if (_squares[i][j] -> occupied()) {
+        // Output left border of row
+        outStream << column + 1 << " |";
+
+        // Output Piece in square, or Output empty cell.
+        for (int row = 0; row < _DIMENSION; row++) {
+
+            // Output contents of square.
+            if (squareAt(row, column).occupied()) {
                 outStream << " ";
-                Piece& occupant = _squares[i][j] -> occupiedBy();
+                Piece& occupant = squareAt(row, column).occupiedBy();
                 occupant.display(outStream);
                 outStream << " ";
+
+            // Output empty square contents.
             } else {
                 outStream << "    ";
             }
+
+            // Output right border of square (& row).
             outStream << "|";
         }
-        
-        outStream << " " << _DIMENSION - i << std::endl;
+
+        // Output number and new line.
+        outStream << " " << column + 1 << std::endl;
    }
+
+   // Output bottom of board.
     outStream << "  -----------------------------------------" << std::endl;
     outStream << "    a    b    c    d    e    f    g    h" << std::endl;
 }
