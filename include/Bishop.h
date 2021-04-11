@@ -1,6 +1,10 @@
 #ifndef BISHOP_H
 #define BISHOP_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "Piece.h"
 
 class Bishop: public Piece {

@@ -16,5 +16,5 @@ const int Rook::value() const {
 
 
 void Rook::display(std::ostream& outStream) const {
-    outStream << Piece::color() << "R";
+    outStream << Piece::color()[0] << "R";
 }

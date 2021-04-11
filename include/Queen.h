@@ -1,6 +1,10 @@
 #ifndef QUEEN_H
 #define QUEEN_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "Piece.h"
 
 class Queen: public Piece {

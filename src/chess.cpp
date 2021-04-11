@@ -18,10 +18,20 @@
 #include "Pawn.h"
 #include "King.h"
 
-void setupBoard(Board& board) {
+
+Player* setup(Board& board) {
     const std::string WHITE = "W";
     const std::string BLACK = "B";
 
+    Player* whitePlayer = new Player("White");
+    Player* blackPlayer = new Player("Black");
+
+    std::set<Piece*>& whitePieces = whitePlayer -> getPieces();
+    std::set<Piece*>& blackPieces = blackPlayer -> getPieces();
+
+    // Set opponents
+    whitePlayer -> setOpponent(*blackPlayer);
+    blackPlayer -> setOpponent(*whitePlayer);
 
     // Setup White Pieces
     board.squareAt(0,0).setOccupier(new Rook(WHITE));
@@ -42,6 +52,7 @@ void setupBoard(Board& board) {
         for (int j = 0; j < 8; j++) {
             Square& aSquare = board.squareAt(j,i);
             aSquare.occupiedBy().setLocation(&aSquare);
+            whitePieces.insert(&aSquare.occupiedBy());
         }
     }
 
@@ -60,23 +71,36 @@ void setupBoard(Board& board) {
         board.squareAt(i,6).setOccupier(new Pawn(BLACK));
     }
 
-    // Set White Piece Locations
+    // Set Black Piece Locations
     for (int i = 6; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             Square& aSquare = board.squareAt(j,i);
             aSquare.occupiedBy().setLocation(&aSquare);
+            blackPieces.insert(&aSquare.occupiedBy());
         }
     }
+    return whitePlayer;
 }
+
 
 int main(int argc, char* argv[]) {
     Board& BOARD = Board::getBoard();
+    bool gameOver = false;
+
 
     // Initilize board and pieces state.
-    setupBoard(BOARD);
+    Player* _currentPlayer = setup(BOARD);
 
-    // Display Board to cout.
-    BOARD.display(std::cout);
+    // Loop until game is finished
+    while (!gameOver) {
+        // Display Board at every valid move
+        BOARD.display(std::cout);
+
+        // Get player to make move, then switch players
+        _currentPlayer -> makeMove();
+        _currentPlayer = &_currentPlayer -> getOpponent();
+    }
+
 
     return EXIT_SUCCESS;
 }

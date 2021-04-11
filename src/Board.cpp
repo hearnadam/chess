@@ -1,4 +1,8 @@
 #include "Board.h"
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "Square.h"
 #include "Piece.h"
 
@@ -14,36 +18,51 @@ Board::Board() {
 }
 
 
-// Accessors
+// Square Accessors
 Square& Board::squareAt(int x, int y) const {
     return *_squares.at(y).at(x);
 }
 
 
 Square& Board::squareAt(std::string location) const {
-    // TODO
-    return *_squares.at(0).at(0);
+    // translate chars into ints using the nature of char.
+    return squareAt(location[0] - 'a', location[1] - '1');
 }
 
 
+// Geometry & clear path checkers
 bool Board::isClearVerticle(Square& from, Square& to) const {
-    // TODO
-    return true;
+    bool isClear = false;
+    if (from.getX() == to.getX()) {
+        // TODO Impliment loop
+        isClear = true;
+    }
+    return isClear;
 }
 
 
 bool Board::isClearHorizontal(Square& from, Square& to) const {
-    // TODO
-    return true;
+    bool isClear = false;
+    if (from.getY() == to.getY()) {
+        // TODO Impliment loop
+        isClear = true;
+    }
+    return isClear;
 }
 
 
 bool Board::isClearDiagonal(Square& from, Square& to) const {
-    // TODO
-    return true;
+    bool isClear = false;
+    // TOOD Diagonol Math
+    if (from.getX() == to.getX()) {
+        // TODO Impliment loop
+        isClear = true;
+    }
+    return isClear;
 }
 
 
+// Display board
 void Board::display(std::ostream& outStream) const {
     // Output top letters
     outStream << "    a    b    c    d    e    f    g    h" << std::endl;
@@ -81,6 +100,7 @@ void Board::display(std::ostream& outStream) const {
 }
 
 
+// Board accessor
 Board& Board::getBoard() {
     return _the_board;
 }

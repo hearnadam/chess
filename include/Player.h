@@ -3,7 +3,8 @@
 
 #include <string>
 #include <set>
-#include "Piece.h"
+// #include "Piece.h"
+class Piece;
 class King;
 
 class Player {
@@ -117,7 +118,7 @@ class Player {
         // Pointer to player's opponent.
         Player* _opponent;
 
-        // Check if this can be a pointer.
+        // TODO: Check if this can be a pointer.
         std::set<Piece*>* _my_pieces;
 
         // The pieces captured by player.

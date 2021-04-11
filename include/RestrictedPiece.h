@@ -1,6 +1,10 @@
 #ifndef RESTRICTEDPIECE_H
 #define RESTRICTEDPIECE_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "Piece.h"
 
 class RestrictedPiece: public Piece {

@@ -1,6 +1,10 @@
 #ifndef ROOK_H
 #define ROOK_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "RestrictedPiece.h"
 
 class Rook: public RestrictedPiece {

@@ -16,5 +16,5 @@ const int Queen::value() const {
 
 
 void Queen::display(std::ostream& outStream) const {
-    outStream << Piece::color() << "Q";
+    outStream << Piece::color()[0] << "Q";
 }

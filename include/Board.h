@@ -1,10 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-class Square;
 #include <iostream>
 #include <string>
 #include <vector>
+class Square;
 
 class Board {
     public:

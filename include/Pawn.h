@@ -1,6 +1,10 @@
 #ifndef PAWN_H
 #define PAWN_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "RestrictedPiece.h"
 
 class Pawn: public RestrictedPiece {
@@ -48,7 +52,7 @@ class Pawn: public RestrictedPiece {
         virtual void display(std::ostream& outStream) const;
 
     private:
-        Piece* _delegate = nullptr;
+        Piece* _delegate;
 
 }; // Pawn
 #endif

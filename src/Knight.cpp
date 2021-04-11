@@ -16,5 +16,5 @@ const int Knight::value() const {
 
 
 void Knight::display(std::ostream& outStream) const {
-    outStream << Piece::color() << "N";
+    outStream << Piece::color()[0] << "N";
 }

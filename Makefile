@@ -17,7 +17,7 @@ CFLAGS   = -Wall -std=c++11 -g -I $(INCDIR) # For debugging
 # a list of all the object files we need
 OBJECTS  = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(notdir $(wildcard $(SRCDIR)/*)))))
 # get a list of all include files
-INCULDES = $(wildcard $(INCDIR)/*)
+INCLUDES = $(wildcard $(INCDIR)/*)
 
 # Default target depends on all objects
 $(BINDIR)/$(TARGET): $(OBJECTS)

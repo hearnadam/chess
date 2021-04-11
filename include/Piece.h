@@ -56,9 +56,9 @@ class Piece {
         /**
          * @brief Gets the location of the piece.
          * 
-         * @return const Square& the reference to the square the piece is on.
+         * @return Square& the reference to the square the piece is on.
          */
-        const Square& getLocation() const;
+        Square& getLocation() const;
 
 
         /**

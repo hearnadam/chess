@@ -4,8 +4,11 @@ RestrictedPiece::RestrictedPiece(std::string color):Piece(color), _moved(false){
 
 
 bool RestrictedPiece::moveTo(Player& byPlayer, Square& to) {
-    // TODO
-    return false;
+    bool moved = Piece::moveTo(byPlayer, to);
+    if (moved) {
+        _moved = moved;
+    }
+    return moved;
 }
 
 

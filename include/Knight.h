@@ -1,6 +1,10 @@
 #ifndef KNIGHT_H
 #define KNIGHT_H
 
+#include <string>
+#include <iostream>
+
+// TODO: Remove
 #include "Piece.h"
 
 class Knight: public Piece {
