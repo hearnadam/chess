@@ -22,11 +22,7 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
         if (to.occupied()) {
             // TODO: Check if this needs to be implimented
             Piece& toCapture = to.occupiedBy();
-            // byPlayer.capture(toCapture);
             byPlayer.capture(toCapture);
-            // std::cout << byPlayer.getName() << std::endl;
-            
-
         }
         Square& oldSquare = this -> getLocation();
 

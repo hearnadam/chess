@@ -4,8 +4,9 @@
 #include <string>
 #include <iostream>
 
-// TODO: Remove
 #include "Piece.h"
+class Square;
+class Player;
 
 class RestrictedPiece: public Piece {
     public:
@@ -16,10 +17,12 @@ class RestrictedPiece: public Piece {
          */
         RestrictedPiece(std::string color);
 
+
         /**
          * @brief Destroy the RestrictedPiece object.
          */
         virtual ~RestrictedPiece() = default;
+
 
         /**
          * @brief Move this piece to the square specified if possible.
@@ -32,8 +35,8 @@ class RestrictedPiece: public Piece {
          */
         virtual bool moveTo(Player& byPlayer, Square& to);
 
-    protected:
 
+    protected:
         /**
          * @brief Returns true if a Restricted Piece has moved.
          * 
@@ -42,8 +45,11 @@ class RestrictedPiece: public Piece {
          */
         const bool hasMoved() const;
 
+
     private:
         // boolean to keep track if RestrictedPiece has moved.
         bool _moved;
+
+
 }; // RestrictedPiece
 #endif

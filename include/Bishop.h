@@ -4,8 +4,9 @@
 #include <string>
 #include <iostream>
 
-// TODO: Remove
 #include "Piece.h"
+class Location;
+class Square;
 
 class Bishop: public Piece {
     public:

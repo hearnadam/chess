@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 class Square;
 class Player;
 
@@ -85,7 +86,6 @@ class Piece {
         virtual void display(std::ostream& outStream) const = 0;
 
     private:
-        // TODO: Comment
         /**
          * @brief Construct a new Piece object
          */

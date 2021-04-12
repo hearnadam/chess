@@ -1,4 +1,5 @@
 #include "Pawn.h"
+
 #include "Board.h"
 #include "Square.h"
 
@@ -49,7 +50,7 @@ bool Pawn::canMoveTo(Square& location) const {
             if (yDist == 1 || yDist == -1) {
                 canMoveTo = true;
 
-            // if pawn has not moved, allow 2 space movement
+            // if pawn has not moved, allow 2 space movement.
             } else if (!hasMoved() && (yDist == 2 || yDist == -2)) {
                 canMoveTo = true;
             }

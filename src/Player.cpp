@@ -3,7 +3,6 @@
 #include "Board.h"
 #include "Square.h"
 #include "Piece.h"
-// class Piece;
 
 
 Player::Player(std::string name):_name(name), _my_pieces(new std::set<Piece*>()) {}
@@ -62,15 +61,15 @@ bool Player::makeMove() {
         }
     }
 
+    std::cout << this -> score() << std::endl;
+
     return madeMove;
 }
 
 
-void capture(Piece& aPiece) {
-    // TODO
-    // _captured.insert(&aPiece);
-    // aPiece.setLocation(nullptr);
-    std::cout << "I am never called" << std::endl;
+void Player::capture(Piece& aPiece) {
+    _captured.insert(&aPiece);
+    aPiece.setLocation(nullptr);
 }
 
 
@@ -80,8 +79,14 @@ const std::string& Player::getName() const {
 
 
 const int Player::score() const {
-    // TODO
-    return 0;
+    int score = 0;
+
+    // Loop through all captured pieces and sum.
+    for(Piece* captured : _captured) {
+        score += captured -> value();
+    }
+
+    return score;
 }
 
 
@@ -98,6 +103,3 @@ Player& Player::getOpponent() const {
 King& Player::getKing() const {
     return *_my_king;
 }
-
-// TODO: Check this
-// std::set<Piece*> _captured;

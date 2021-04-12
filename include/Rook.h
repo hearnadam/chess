@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 
-// TODO: Remove
 #include "RestrictedPiece.h"
+class Square;
 
 class Rook: public RestrictedPiece {
     public:

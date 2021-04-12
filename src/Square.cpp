@@ -1,10 +1,11 @@
 #include "Square.h"
+
 #include "Piece.h"
 
 Square::Square(int x, int y):_x(x), _y(y), _occupant(nullptr) {}
 
 void Square::setOccupier(Piece* piece) {
-    // TODO: CALL SETLOCATION
+   // TODO: Document Set location behavior 
     _occupant = piece;
     if (_occupant != nullptr) {
         _occupant->setLocation(this);

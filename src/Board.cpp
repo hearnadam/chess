@@ -1,8 +1,8 @@
-#include "Board.h"
 #include <string>
 #include <iostream>
 
-// TODO: Remove
+#include "Board.h"
+
 #include "Square.h"
 #include "Piece.h"
 
@@ -32,11 +32,23 @@ Square& Board::squareAt(std::string location) const {
 
 // Geometry & clear path checkers
 bool Board::isClearVerticle(Square& from, Square& to) const {
-    bool isClear = false;
+    bool isClear = true;
+
     if (from.getX() == to.getX()) {
+        int lowerY = std::min(from.getY(), to.getY());
+        int upperY = std::max(from.getY(), to.getY());
+        int x = from.getX();
+
         // TODO Impliment loop
-        isClear = true;
+        for (int y = lowerY + 1; y < upperY && isClear; y++) {
+            if (squareAt(x, y).occupied()) {
+                isClear = false;
+            }
+        }
+    } else {
+        isClear = false;
     }
+
     return isClear;
 }
 
