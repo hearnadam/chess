@@ -5,10 +5,11 @@
 Square::Square(int x, int y):_x(x), _y(y), _occupant(nullptr) {}
 
 void Square::setOccupier(Piece* piece) {
-   // TODO: Document Set location behavior 
     _occupant = piece;
-    if (_occupant != nullptr) {
-        _occupant->setLocation(this);
+
+    // Sets piece's location to be this if the Piece pointer is not null.
+    if (piece != nullptr) {
+        piece->setLocation(this);
     }
 }
 

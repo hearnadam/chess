@@ -12,22 +12,22 @@ void Piece::setLocation(Square* square) {
 
 
 bool Piece::moveTo(Player& byPlayer, Square& to) {
-    // TODO: Fix this
     bool moved = false;
 
+    // Check geometry & move validity.
     if (this -> canMoveTo(to)) {
-        // TODO: Check for check
 
-
+        // Check if destination is occupied.
         if (to.occupied()) {
-            // TODO: Check if this needs to be implimented
-            Piece& toCapture = to.occupiedBy();
-            byPlayer.capture(toCapture);
-        }
-        Square& oldSquare = this -> getLocation();
 
-        oldSquare.setOccupier(nullptr);
-        this -> setLocation(&to);
+            // Capture piece on destination.
+            byPlayer.capture(to.occupiedBy());
+        }
+
+        // Get 'source' for move and remove its occupant. 
+        this -> getLocation().setOccupier(nullptr);
+
+        // Set destination to contain this piece & set this piece's location.
         to.setOccupier(this);
 
         moved = true;

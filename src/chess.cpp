@@ -20,11 +20,11 @@
 
 
 Player* setup(Board& board) {
-    const std::string WHITE = "W";
-    const std::string BLACK = "B";
+    const std::string WHITE = "White";
+    const std::string BLACK = "Black";
 
-    Player* whitePlayer = new Player("White");
-    Player* blackPlayer = new Player("Black");
+    Player* whitePlayer = new Player(WHITE);
+    Player* blackPlayer = new Player(BLACK);
 
     std::set<Piece*>& whitePieces = whitePlayer -> getPieces();
     std::set<Piece*>& blackPieces = blackPlayer -> getPieces();
@@ -43,18 +43,18 @@ Player* setup(Board& board) {
     board.squareAt(6,0).setOccupier(new Knight(WHITE));
     board.squareAt(7,0).setOccupier(new Rook(WHITE));
 
+    // Setup White pawns and add to White set.
     for (int i = 0; i < 8; i++) {
-        board.squareAt(i,1).setOccupier(new Pawn(WHITE));
+        board.squareAt(i, 1).setOccupier(new Pawn(WHITE));
+        whitePieces.insert(& board.squareAt(i, 1).occupiedBy());
+
     }
 
     // Set White Piece Locations
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 8; j++) {
-            Square& aSquare = board.squareAt(j,i);
-            aSquare.occupiedBy().setLocation(&aSquare);
-            whitePieces.insert(&aSquare.occupiedBy());
-        }
+    for (int i = 0; i < 8; i++) {
+            whitePieces.insert(& board.squareAt(i, 0).occupiedBy());
     }
+
 
 
     // Setup Black Pieces
@@ -67,18 +67,18 @@ Player* setup(Board& board) {
     board.squareAt(6,7).setOccupier(new Knight(BLACK));
     board.squareAt(7,7).setOccupier(new Rook(BLACK));
 
+    // Setup Black pawns and add to Black set.
     for (int i = 0; i < 8; i++) {
-        board.squareAt(i,6).setOccupier(new Pawn(BLACK));
+        board.squareAt(i, 6).setOccupier(new Pawn(BLACK));
+        blackPieces.insert(& board.squareAt(i, 6).occupiedBy());
+
     }
 
-    // Set Black Piece Locations
-    for (int i = 6; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            Square& aSquare = board.squareAt(j,i);
-            aSquare.occupiedBy().setLocation(&aSquare);
-            blackPieces.insert(&aSquare.occupiedBy());
-        }
+    // Add Top row of Black Pieces to set.
+    for (int i = 0; i < 8; i++) {
+        blackPieces.insert(& board.squareAt(i, 7).occupiedBy());
     }
+
     return whitePlayer;
 }
 
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
         BOARD.display(std::cout);
 
         // Get player to make move, then switch players
-        _currentPlayer -> makeMove();
+        gameOver = !_currentPlayer -> makeMove();
         _currentPlayer = &_currentPlayer -> getOpponent();
     }
 

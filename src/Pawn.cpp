@@ -6,11 +6,19 @@
 Pawn::Pawn(std::string color):RestrictedPiece(color), _delegate(nullptr) {}
 
 Pawn::~Pawn() {
-    // TODO: Take care of delegate
+    // Delete delegate if it exists.
+    if (_delegate != nullptr) {
+        delete _delegate;
+    }
+    // TODO: Check if I need to explicitely call this.
+    // Piece::~Piece();
 }
 
 void Pawn::setLocation(Square* square) {
+    // Set (this) pawn location.
     Piece::setLocation(square);
+
+    // Set delegate's location.
     if (_delegate != nullptr) {
         _delegate -> setLocation(square);
     }
@@ -33,7 +41,8 @@ bool Pawn::canMoveTo(Square& location) const {
         canMoveTo = _delegate -> canMoveTo(location);
 
     // Limit pawn movement to be forwards based on color.
-    } else if ((color()[0] == 'W' && yDist > 0) || (color()[0] == 'B' && yDist < 0)) {
+    } else if ((color()[0] == 'W' && yDist < 3 && yDist > 0)
+                || (color()[0] == 'B' && yDist < 0 && yDist > -3)) {
 
         // If occupied limit movement to one diagnol space
         if (location.occupied()) {
@@ -72,7 +81,7 @@ void Pawn::display(std::ostream& outStream) const {
     if (_delegate != nullptr) {
         _delegate -> display(outStream);
 
-    // else print color and symbol.
+    // else print pawn color and symbol.
     } else {
         outStream << Piece::color()[0] << "P";
     }

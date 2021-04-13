@@ -30,22 +30,27 @@ Square& Board::squareAt(std::string location) const {
 }
 
 
-// Geometry & clear path checkers
+// Geometry & clear path checkers.
 bool Board::isClearVerticle(Square& from, Square& to) const {
     bool isClear = true;
 
+    // Ensures path is vertical.
     if (from.getX() == to.getX()) {
+
+        // Sets bounds for the loop.
         int lowerY = std::min(from.getY(), to.getY());
         int upperY = std::max(from.getY(), to.getY());
         int x = from.getX();
 
-        // TODO Impliment loop
+        // TODO: Validate correctness.
         for (int y = lowerY + 1; y < upperY && isClear; y++) {
+            // If a square is occupied path is NOT clear.  
             if (squareAt(x, y).occupied()) {
                 isClear = false;
             }
         }
     } else {
+        // Not vertical
         isClear = false;
     }
 
@@ -66,7 +71,7 @@ bool Board::isClearHorizontal(Square& from, Square& to) const {
 bool Board::isClearDiagonal(Square& from, Square& to) const {
     bool isClear = false;
     // TOOD Diagonol Math
-    if (from.getX() == to.getX()) {
+    if (true) {
         // TODO Impliment loop
         isClear = true;
     }

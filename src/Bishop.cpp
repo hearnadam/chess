@@ -16,5 +16,5 @@ const int Bishop::value() const {
 
 
 void Bishop::display(std::ostream& outStream) const {
-    outStream << Piece::color() << "B";
+    outStream << Piece::color()[0] << "B";
 }

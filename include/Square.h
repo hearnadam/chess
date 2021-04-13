@@ -1,6 +1,3 @@
-/*
- * TODO: Fix Comments
- */
 #ifndef SQUARE_H
 #define SQUARE_H
 
@@ -25,7 +22,7 @@ class Square {
 
 
         /**
-         * @brief Set the Square's occupier.
+         * @brief Set the Square's occupier and set's new occupant's location.
          * 
          * @param piece pointer to a piece object.
          */

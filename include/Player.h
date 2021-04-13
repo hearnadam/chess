@@ -45,8 +45,8 @@ class Player {
 
 
         /**
-         * TODO: Comment this once I figure out what it does.
-         * @brief 
+         * @brief Prompts player for move until valid move is given.
+         * Moves piece and captures as necessary.
          * 
          * @return true if move was made.
          * @return false if move was not made.
