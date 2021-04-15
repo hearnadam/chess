@@ -61,8 +61,6 @@ bool Player::makeMove() {
         }
     }
 
-    std::cout << this -> score() << std::endl;
-
     return madeMove;
 }
 
