@@ -15,10 +15,12 @@ class Player {
          */
         Player(std::string name);
 
+
         /**
          * @brief Destroy the Player object.
          */
         ~Player() = default;
+
 
         /**
          * @brief Set the player's Pieces.
@@ -122,5 +124,6 @@ class Player {
 
         // The pieces captured by player.
         std::set<Piece*> _captured;
+
 }; // Player
 #endif

@@ -8,6 +8,7 @@
 class Square;
 class Player;
 
+
 class RestrictedPiece: public Piece {
     public:
         /**

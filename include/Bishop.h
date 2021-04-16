@@ -8,6 +8,7 @@
 class Location;
 class Square;
 
+
 class Bishop: public Piece {
     public:
         /**

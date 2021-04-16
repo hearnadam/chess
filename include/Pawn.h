@@ -6,6 +6,8 @@
 
 #include "RestrictedPiece.h"
 class Square;
+class Piece;
+
 
 class Pawn: public RestrictedPiece {
     public:
@@ -27,6 +29,19 @@ class Pawn: public RestrictedPiece {
          * @param square the square where it will be set.
          */
         virtual void setLocation(Square* square);
+
+
+        /**
+         * @brief Move this pawn to the square specified if possible.
+         * If pawn reaches end of board sucessfully, upgrade to queen.
+         * 
+         * @param byPlayer the player moving the piece.
+         * @param to the square the piece is being moved to.
+         * @return true if the piece moved.
+         * @return false if the piece did not move.
+         */
+        virtual bool moveTo(Player& byPlayer, Square& to);
+
 
         /**
          * @brief Returns true if the pawn can move to the square passed in.

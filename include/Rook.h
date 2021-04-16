@@ -6,6 +6,8 @@
 
 #include "RestrictedPiece.h"
 class Square;
+class Piece;
+
 
 class Rook: public RestrictedPiece {
     public:
@@ -16,10 +18,12 @@ class Rook: public RestrictedPiece {
          */
         Rook(std::string color);
 
+
         /**
          * @brief Destroy the Rook object.
          */
         virtual ~Rook() = default;
+
 
         /**
          * @brief Returns true if the rook can move to the square passed in.
@@ -30,12 +34,14 @@ class Rook: public RestrictedPiece {
          */
         virtual bool canMoveTo(Square& location) const;
 
+
         /**
          * @brief Returns an int of the value of the rook.
          * 
          * @return const int the value of the rook.
          */
         virtual const int value() const;
+
 
         /**
          * @brief Outputs the Rook's string representation to outStream.

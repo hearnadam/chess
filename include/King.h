@@ -6,6 +6,8 @@
 
 #include "RestrictedPiece.h"
 class Square;
+class Piece;
+
 
 class King: public RestrictedPiece {
     public:

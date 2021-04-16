@@ -7,6 +7,7 @@
 
 class Square;
 
+
 class Board {
     public:
 

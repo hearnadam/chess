@@ -16,10 +16,12 @@ class Piece {
          */
         Piece(std::string color);
 
+
         /**
          * @brief Destroy the Piece object.
          */
         virtual ~Piece() = default;
+
 
         /**
          * @brief Set the square the piece is on.
@@ -27,6 +29,7 @@ class Piece {
          * @param square the square where it will be set.
          */
         virtual void setLocation(Square* square);
+
 
         /**
          * @brief Move this piece to the square specified if possible.
@@ -46,6 +49,7 @@ class Piece {
          */
         const std::string color() const;
 
+
         /**
          * @brief Returns true if the piece is on the board.
          * 
@@ -53,6 +57,7 @@ class Piece {
          * @return false if piece is not on the board.
          */
         const bool isOnBoard() const;
+
 
         /**
          * @brief Gets the location of the piece.
@@ -71,12 +76,14 @@ class Piece {
          */
         virtual bool canMoveTo(Square& location) const = 0;
 
+
         /**
          * @brief Returns an int of the value of the piece.
          * 
          * @return const int the value of the piece.
          */
         virtual const int value() const = 0;
+
 
         /**
          * @brief Outputs the piece's string representation to outStream.
@@ -85,15 +92,18 @@ class Piece {
          */
         virtual void display(std::ostream& outStream) const = 0;
 
+
     private:
         /**
          * @brief Construct a new Piece object
          */
         Piece() = default;
+
+
         // The string representation of the piece color.
         const std::string _color;
 
-        // Where the piece things it is.
+        // Where the piece thinks it is.
         Square* _square;
 
 }; // Piece

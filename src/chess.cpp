@@ -98,6 +98,9 @@ int main(int argc, char* argv[]) {
 
         // Get player to make move, then switch players
         gameOver = !_currentPlayer -> makeMove();
+
+
+        // TODO: Remove
         _currentPlayer = &_currentPlayer -> getOpponent();
     }
 

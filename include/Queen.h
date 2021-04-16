@@ -16,10 +16,12 @@ class Queen: public Piece {
          */
         Queen(std::string color);
 
+
         /**
          * @brief Destroy the Queen object.
          */
         virtual ~Queen() = default;
+
 
         /**
          * @brief Returns true if the queen can move to the square passed in.
@@ -30,12 +32,14 @@ class Queen: public Piece {
          */
         virtual bool canMoveTo(Square& location) const;
 
+
         /**
          * @brief Returns an int of the value of the queen.
          * 
          * @return const int the value of the queen.
          */
         virtual const int value() const;
+
 
         /**
          * @brief Outputs the Queen's string representation to outStream.

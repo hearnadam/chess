@@ -22,7 +22,7 @@ class Square {
 
 
         /**
-         * @brief Set the Square's occupier and set's new occupant's location.
+         * @brief Set the Square's occupier and sets new occupant's location.
          * 
          * @param piece pointer to a piece object.
          */
@@ -74,5 +74,6 @@ class Square {
 
         // Reference to the piece that occupies this Square.
         Piece* _occupant;
+
 }; // Square
 #endif

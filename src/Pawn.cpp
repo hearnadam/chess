@@ -11,9 +11,8 @@ Pawn::~Pawn() {
     if (_delegate != nullptr) {
         delete _delegate;
     }
-    // TODO: Check if I need to explicitely call this.
-    // Piece::~Piece();
 }
+
 
 void Pawn::setLocation(Square* square) {
     // Set (this) pawn location.
@@ -22,18 +21,24 @@ void Pawn::setLocation(Square* square) {
     // Set delegate's location if it exists.
     if (_delegate != nullptr) {
         _delegate -> setLocation(square);
+    }
+}
 
-        // If delegate is null and square is not null.
-    } else if (square != nullptr) {
+
+bool Pawn::moveTo(Player& byPlayer, Square& to) {
+    bool moved = RestrictedPiece::moveTo(byPlayer, to);
+    if (moved) {
         //  If Pawn reaches color dependant end of board, create delegate.
-        if ((this -> color()[0] == 'W' && square -> getY() == 7)
-            || (this -> color()[0] == 'B' && square -> getY() == 0)) {
+        if ((this -> color()[0] == 'W' && to.getY() == 7)
+            || (this -> color()[0] == 'B' && to.getY() == 0)) {
 
                 // Auto set delegate to be queen of this color.
                 _delegate = new Queen(this -> color());
         }
     }
+    return moved;
 }
+
 
 
 bool Pawn::canMoveTo(Square& location) const {
@@ -52,25 +57,21 @@ bool Pawn::canMoveTo(Square& location) const {
         canMoveTo = _delegate -> canMoveTo(location);
 
     // Limit pawn movement to be forwards based on color.
-    } else if ((color()[0] == 'W' && yDist < 3 && yDist > 0)
-                || (color()[0] == 'B' && yDist < 0 && yDist > -3)) {
+    } else if ((color()[0] == 'W' && (yDist == 1 || yDist == 2))
+                || (color()[0] == 'B' && (yDist == -1 || yDist == -2))) {
 
-        // If occupied limit movement to one diagnol space
+        // If occupied, limit movement to one diagonal space.
         if (location.occupied()) {
 
-            // Ensure movement is only one forward and one to the side.
+            // Limit movement to one diagonol space
             if ((xDist == -1 || xDist == 1) && (yDist == -1 || yDist == 1)) {
-
-                // Ensure color of pawn to capture is not the same as this pawn.
-                if (location.occupiedBy().color()[0] != this -> color()[0]) {
-                    canMoveTo = true;
-                }
+                canMoveTo = true;
             }
 
-        // If vertical is clear, ensure distance is acceptable.
+        // Verify path is vertical & clear.
         } else if (Board::getBoard().isClearVerticle(thisLocation, location)) {
 
-            // regardless of position allow 1 space movement if clear.
+            // regardless of position allow 1 space movement.
             if (yDist == 1 || yDist == -1) {
                 canMoveTo = true;
 

@@ -7,6 +7,7 @@
 #include "Piece.h"
 class Square;
 
+
 class Knight: public Piece {
     public:
         /**
