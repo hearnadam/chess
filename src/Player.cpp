@@ -26,31 +26,29 @@ void Player::setKing(King& king) {
 bool Player::makeMove() {
     bool madeMove = false;
     std::set<Piece *>& playersPieces = getPieces();
+    std::string userMove;
 
 
     while (!madeMove) {
-        std::string move;
-
         // Prompt user for move and get move string.
         std::cout << getName() << " make move: ";
-        getline(std::cin, move);
+        getline(std::cin, userMove);
 
         // validate and attempt move.
-        if (move.length() >= 5) {
+        if (userMove.length() >= 5) {
             try {
                 // Board's vector backing validates squares are on the board.
-                Square& s1 = Board::getBoard().squareAt(move);
-                Square& s2 = Board::getBoard().squareAt(move.substr(3,5));
+                Square& from = Board::getBoard().squareAt(userMove);
+                Square& to = Board::getBoard().squareAt(userMove.substr(3,5));
 
                 // validate 'from' square is occupied.
-                if (s1.occupied()) {
+                if (from.occupied()) {
 
                     // Ensure player owns piece attempting to move.
-                    Piece& p1 = s1.occupiedBy();
-                    if (playersPieces.find(&p1) != playersPieces.end()) {
+                    if (playersPieces.find(&from.occupiedBy()) != playersPieces.end()) {
 
                         // Make move.
-                        madeMove = p1.moveTo(*this, s2);
+                        madeMove = from.occupiedBy().moveTo(*this, to);
                     }
                 }
 
@@ -58,6 +56,10 @@ bool Player::makeMove() {
             } catch (const std::out_of_range& e) {
                 madeMove = false;
             }
+        }
+
+        if (!madeMove) {
+            std::cout << "Invalid Move. Try Again." << std::endl;
         }
     }
 
@@ -82,7 +84,7 @@ const int Player::score() const {
 
     // Loop through all captured pieces and sum.
     for(Piece* captured : _captured) {
-        score += captured -> value();
+        score += captured->value();
     }
 
     return score;

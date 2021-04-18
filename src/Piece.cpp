@@ -15,12 +15,13 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
     bool moved = true;
 
     // Check geometry & move validity.
-    if (this -> canMoveTo(to)) {
+    if (canMoveTo(to)) {
 
         // Check if destination is occupied.
         if (to.occupied()) {
-            if (this -> color()[0] != to.occupiedBy().color()[0]) {
+            if (color()[0] != to.occupiedBy().color()[0]) {
 
+                // TODO: move this to after move is made.
                 // Capture piece on destination.
                 byPlayer.capture(to.occupiedBy());
 
@@ -33,7 +34,7 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
         // If captured or no piece was occupying space
         if (moved) {
             // Get 'source' for move and remove its occupant. 
-            this -> getLocation().setOccupier(nullptr);
+            getLocation().setOccupier(nullptr);
 
             // Set destination to contain this piece & set this piece's location.
             to.setOccupier(this);

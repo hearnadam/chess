@@ -8,7 +8,7 @@ Pawn::Pawn(std::string color):RestrictedPiece(color), _delegate(nullptr) {}
 
 Pawn::~Pawn() {
     // Delete delegate if it exists.
-    if (_delegate != nullptr) {
+    if (_delegate) {
         delete _delegate;
     }
 }
@@ -19,8 +19,8 @@ void Pawn::setLocation(Square* square) {
     Piece::setLocation(square);
 
     // Set delegate's location if it exists.
-    if (_delegate != nullptr) {
-        _delegate -> setLocation(square);
+    if (_delegate) {
+        _delegate->setLocation(square);
     }
 }
 
@@ -29,11 +29,12 @@ bool Pawn::moveTo(Player& byPlayer, Square& to) {
     bool moved = RestrictedPiece::moveTo(byPlayer, to);
     if (moved) {
         //  If Pawn reaches color dependant end of board, create delegate.
-        if ((this -> color()[0] == 'W' && to.getY() == 7)
-            || (this -> color()[0] == 'B' && to.getY() == 0)) {
+        if ((color()[0] == 'W' && to.getY() == 7)
+            || (color()[0] == 'B' && to.getY() == 0)) {
 
+                // TODO: Fix this Lurking Bug
                 // Auto set delegate to be queen of this color.
-                _delegate = new Queen(this -> color());
+                _delegate = new Queen(color());
         }
     }
     return moved;
@@ -42,47 +43,52 @@ bool Pawn::moveTo(Player& byPlayer, Square& to) {
 
 
 bool Pawn::canMoveTo(Square& location) const {
-    Square& thisLocation = this -> getLocation();
+    int xDist;
+    int yDist;
 
     // Set default return value to be false.
-    bool canMoveTo = false;
+    bool canMove = false;
 
     // Calculate distances
-    int xDist = location.getX() - this -> getLocation().getX();
-    int yDist = location.getY() - this -> getLocation().getY();
+    if (color()[0] == 'W') {
+        xDist = location.getX() - getLocation().getX();
+        yDist = location.getY() - getLocation().getY();
+    } else {
+        xDist = getLocation().getX() - location.getX();
+        yDist = getLocation().getY() - location.getY();
+    }
 
 
     // if pawn has delegate, rely on delegate's canMoveTo function.
-    if (_delegate != nullptr) {
-        canMoveTo = _delegate -> canMoveTo(location);
+    if (_delegate) {
+        canMove = _delegate->canMoveTo(location);
 
     // Limit pawn movement to be forwards based on color.
-    } else if ((color()[0] == 'W' && (yDist == 1 || yDist == 2))
-                || (color()[0] == 'B' && (yDist == -1 || yDist == -2))) {
+    } else if (yDist == 1 || yDist == 2) {
 
         // If occupied, limit movement to one diagonal space.
         if (location.occupied()) {
 
             // Limit movement to one diagonol space
-            if ((xDist == -1 || xDist == 1) && (yDist == -1 || yDist == 1)) {
-                canMoveTo = true;
+            if ((xDist == -1 || xDist == 1) && yDist == 1) {
+                canMove = true;
             }
 
         // Verify path is vertical & clear.
-        } else if (Board::getBoard().isClearVerticle(thisLocation, location)) {
+        } else if (Board::getBoard().isClearVerticle(getLocation(), location)) {
 
             // regardless of position allow 1 space movement.
-            if (yDist == 1 || yDist == -1) {
-                canMoveTo = true;
+            if (yDist == 1) {
+                canMove = true;
 
             // if pawn has not moved, allow 2 space movement.
-            } else if (!hasMoved() && (yDist == 2 || yDist == -2)) {
-                canMoveTo = true;
+            } else if (!hasMoved() && (yDist == 2)) {
+                canMove = true;
             }
         }
     }
 
-    return canMoveTo;
+    return canMove;
 }
 
 
@@ -94,8 +100,8 @@ const int Pawn::value() const {
 
 void Pawn::display(std::ostream& outStream) const {
     // if pawn has delegate, rely on delegate's display function.
-    if (_delegate != nullptr) {
-        _delegate -> display(outStream);
+    if (_delegate) {
+        _delegate->display(outStream);
 
     // else print pawn color and symbol.
     } else {

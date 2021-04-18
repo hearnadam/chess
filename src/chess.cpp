@@ -6,32 +6,19 @@
 #include "Square.h"
 #include "Player.h"
 
-// Piece classes
-// #include "Piece.h" // TODO: Remove?
+// Piece classess
 #include "Queen.h"
 #include "Knight.h"
 #include "Bishop.h"
 
 // RestrictedPiece classes
-// #include "RestrictedPiece.h" // TODO: Remove?
 #include "Rook.h"
 #include "Pawn.h"
 #include "King.h"
 
-
-Player* setup(Board& board) {
+void setupBoard(Board& board, Player& whitePlayer, Player& blackPlayer) {
     const std::string WHITE = "White";
     const std::string BLACK = "Black";
-
-    Player* whitePlayer = new Player(WHITE);
-    Player* blackPlayer = new Player(BLACK);
-
-    std::set<Piece*>& whitePieces = whitePlayer -> getPieces();
-    std::set<Piece*>& blackPieces = blackPlayer -> getPieces();
-
-    // Set opponents
-    whitePlayer -> setOpponent(*blackPlayer);
-    blackPlayer -> setOpponent(*whitePlayer);
 
     // Setup White Pieces
     board.squareAt(0,0).setOccupier(new Rook(WHITE));
@@ -46,15 +33,14 @@ Player* setup(Board& board) {
     // Setup White pawns and add to White set.
     for (int i = 0; i < 8; i++) {
         board.squareAt(i, 1).setOccupier(new Pawn(WHITE));
-        whitePieces.insert(& board.squareAt(i, 1).occupiedBy());
+        whitePlayer.getPieces().insert(& board.squareAt(i, 1).occupiedBy());
 
     }
 
     // Set White Piece Locations
     for (int i = 0; i < 8; i++) {
-            whitePieces.insert(& board.squareAt(i, 0).occupiedBy());
+        whitePlayer.getPieces().insert(& board.squareAt(i, 0).occupiedBy());
     }
-
 
 
     // Setup Black Pieces
@@ -70,38 +56,42 @@ Player* setup(Board& board) {
     // Setup Black pawns and add to Black set.
     for (int i = 0; i < 8; i++) {
         board.squareAt(i, 6).setOccupier(new Pawn(BLACK));
-        blackPieces.insert(& board.squareAt(i, 6).occupiedBy());
+        blackPlayer.getPieces().insert(& board.squareAt(i, 6).occupiedBy());
 
     }
 
     // Add Top row of Black Pieces to set.
     for (int i = 0; i < 8; i++) {
-        blackPieces.insert(& board.squareAt(i, 7).occupiedBy());
+        blackPlayer.getPieces().insert(& board.squareAt(i, 7).occupiedBy());
     }
-
-    return whitePlayer;
 }
 
 
 int main(int argc, char* argv[]) {
-    Board& BOARD = Board::getBoard();
     bool gameOver = false;
+    Board& theBoard = Board::getBoard();
 
+    // Initilize Players & current player reference.
+    Player whitePlayer = Player("White");
+    Player blackPlayer = Player("Black");
+    Player& currentPlayer = whitePlayer;
 
     // Initilize board and pieces state.
-    Player* _currentPlayer = setup(BOARD);
+    setupBoard(theBoard, whitePlayer, blackPlayer);
+
+    // Set players' opponents.
+    whitePlayer.setOpponent(blackPlayer);
+    blackPlayer.setOpponent(whitePlayer);
+
 
     // Loop until game is finished
     while (!gameOver) {
         // Display Board at every valid move
-        BOARD.display(std::cout);
+        theBoard.display(std::cout);
 
         // Get player to make move, then switch players
-        gameOver = !_currentPlayer -> makeMove();
-
-
-        // TODO: Remove
-        _currentPlayer = &_currentPlayer -> getOpponent();
+        gameOver = !currentPlayer.makeMove();
+        currentPlayer = currentPlayer.getOpponent();
     }
 
 
