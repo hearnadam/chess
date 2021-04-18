@@ -16,7 +16,7 @@
 #include "Pawn.h"
 #include "King.h"
 
-void setupBoard(Board& board, Player& whitePlayer, Player& blackPlayer) {
+void setup(Board& board, Player& whitePlayer, Player& blackPlayer) {
     const std::string WHITE = "White";
     const std::string BLACK = "Black";
 
@@ -72,12 +72,12 @@ int main(int argc, char* argv[]) {
     Board& theBoard = Board::getBoard();
 
     // Initilize Players & current player reference.
-    Player whitePlayer = Player("White");
-    Player blackPlayer = Player("Black");
+    Player& whitePlayer = *new Player("White");
+    Player& blackPlayer = *new Player("Black");
     Player& currentPlayer = whitePlayer;
 
     // Initilize board and pieces state.
-    setupBoard(theBoard, whitePlayer, blackPlayer);
+    setup(theBoard, whitePlayer, blackPlayer);
 
     // Set players' opponents.
     whitePlayer.setOpponent(blackPlayer);
