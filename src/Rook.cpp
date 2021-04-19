@@ -1,17 +1,25 @@
 #include "Rook.h"
 
+#include "Board.h"
+
 Rook::Rook(std::string color):RestrictedPiece(color) {}
 
 
 bool Rook::canMoveTo(Square& location) const {
-    // TODO
-    return false;
+    bool canMove = false;
+
+    if (Board::getBoard().isClearVerticle(getLocation(), location)) {
+        canMove = true;
+    } else if (Board::getBoard().isClearHorizontal(getLocation(), location)) {
+        canMove = true;
+    }
+
+    return canMove;
 }
 
 
 const int Rook::value() const {
-    // TODO
-    return 0;
+    return 5;
 }
 
 

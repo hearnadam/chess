@@ -10,8 +10,7 @@ bool Knight::canMoveTo(Square& location) const {
 
 
 const int Knight::value() const {
-    // TODO
-    return 0;
+    return 3;
 }
 
 

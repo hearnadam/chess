@@ -1,17 +1,17 @@
 #include "Bishop.h"
 
+#include "Board.h"
+
 Bishop::Bishop(std::string color):Piece(color) {}
 
 
 bool Bishop::canMoveTo(Square& location) const {
-    // TODO
-    return false;
+    return Board::getBoard().isClearDiagonal(getLocation(), location);
 }
 
 
 const int Bishop::value() const {
-    // TODO
-    return 0;
+    return 3;
 }
 
 

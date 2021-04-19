@@ -1,17 +1,27 @@
 #include "Queen.h"
 
+#include "Board.h"
+
 Queen::Queen(std::string color):Piece(color) {}
 
 
 bool Queen::canMoveTo(Square& location) const {
-    // TODO
-    return false;
+    bool canMove = false;
+
+    if (Board::getBoard().isClearVerticle(getLocation(), location)) {
+        canMove = true;
+    } else if (Board::getBoard().isClearVerticle(getLocation(), location)) {
+        canMove = true;
+    } else if (Board::getBoard().isClearDiagonal(getLocation(), location)) {
+        canMove = true;
+    }
+
+    return canMove;
 }
 
 
 const int Queen::value() const {
-    // TODO
-    return 0;
+    return 9;
 }
 
 

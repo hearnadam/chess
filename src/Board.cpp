@@ -32,26 +32,20 @@ Square& Board::squareAt(std::string location) const {
 
 // Geometry & clear path checkers.
 bool Board::isClearVerticle(Square& from, Square& to) const {
-    bool isClear = true;
-
     // Ensures path is vertical.
-    if (from.getX() == to.getX()) {
+    bool isClear = from.getX() == to.getX();
 
-        // Sets bounds for the loop.
-        int lowerY = std::min(from.getY(), to.getY());
-        int upperY = std::max(from.getY(), to.getY());
-        int x = from.getX();
+    // Sets bounds for the loop.
+    int lowerY = std::min(from.getY(), to.getY());
+    int upperY = std::max(from.getY(), to.getY());
 
-        // TODO: Validate correctness.
-        for (int y = lowerY + 1; y < upperY && isClear; y++) {
-            // If a square is occupied path is NOT clear.  
-            if (squareAt(x, y).occupied()) {
-                isClear = false;
-            }
+
+    // Ensure path is clear.
+    for (int y = lowerY + 1; y < upperY && isClear; y++) {
+        // If a square is occupied path is NOT clear.  
+        if (squareAt(from.getX(), y).occupied()) {
+            isClear = false;
         }
-    } else {
-        // Not vertical
-        isClear = false;
     }
 
     return isClear;
@@ -59,22 +53,48 @@ bool Board::isClearVerticle(Square& from, Square& to) const {
 
 
 bool Board::isClearHorizontal(Square& from, Square& to) const {
-    bool isClear = false;
-    if (from.getY() == to.getY()) {
-        // TODO Impliment loop
-        isClear = true;
+    // Ensures path is horizontal.
+    bool isClear = from.getY() == to.getY();
+
+    // Sets bounds for the loop.
+    int leftX = std::min(from.getX(), to.getX());
+    int rightX = std::max(from.getX(), to.getX());
+
+    // Ensure path is clear
+    for (int x = leftX + 1; x < rightX && isClear; x++) {
+        // If a square is occupied path is NOT clear.  
+        if (squareAt(x, from.getY()).occupied()) {
+            isClear = false;
+        }
     }
+
     return isClear;
 }
 
 
 bool Board::isClearDiagonal(Square& from, Square& to) const {
-    bool isClear = false;
-    // TOOD Diagonol Math
-    if (true) {
-        // TODO Impliment loop
-        isClear = true;
+    int lowerY = std::min(from.getY(), to.getY());
+    int upperY = std::max(from.getY(), to.getY());
+    int leftX = std::min(from.getX(), to.getX());
+    int rightX = std::max(from.getX(), to.getX());
+    bool isClear = ((upperY - lowerY) == (rightX - leftX));
+
+    // TODO: Fix this formatting
+    // Ensure path is clear
+    {
+    int y = lowerY + 1;
+    for (int x = leftX + 1; (x < rightX && y < upperY) && isClear;x++) {
+        // If a square is occupied path is NOT clear.  
+        if (squareAt(x, y).occupied()) {
+            isClear = false;
+        }
+        y++;
     }
+    }
+
+    // for (std::pair<int, int> indices(leftX + 1, lowerY + 1); indices.first < rightX && isClear; indices.first++ ) {
+
+    // }
     return isClear;
 }
 

@@ -93,8 +93,7 @@ bool Pawn::canMoveTo(Square& location) const {
 
 
 const int Pawn::value() const {
-    // TODO
-    return 0;
+    return 1;
 }
 
 

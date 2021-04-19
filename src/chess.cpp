@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
     // Initilize Players & current player reference.
     Player& whitePlayer = *new Player("White");
     Player& blackPlayer = *new Player("Black");
-    Player& currentPlayer = whitePlayer;
+    Player* currentPlayer = &whitePlayer;
 
     // Initilize board and pieces state.
     setup(theBoard, whitePlayer, blackPlayer);
@@ -90,8 +90,8 @@ int main(int argc, char* argv[]) {
         theBoard.display(std::cout);
 
         // Get player to make move, then switch players
-        gameOver = !currentPlayer.makeMove();
-        currentPlayer = currentPlayer.getOpponent();
+        gameOver = !currentPlayer->makeMove();
+        currentPlayer = &currentPlayer->getOpponent();
     }
 
 

@@ -37,6 +37,7 @@ bool Player::makeMove() {
         // validate and attempt move.
         if (userMove.length() >= 5) {
             try {
+                // TODO: Ask dr. Hansen why these are bad.
                 // Board's vector backing validates squares are on the board.
                 Square& from = Board::getBoard().squareAt(userMove);
                 Square& to = Board::getBoard().squareAt(userMove.substr(3,5));
