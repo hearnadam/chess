@@ -41,6 +41,15 @@ class Piece {
          */
         virtual bool moveTo(Player& byPlayer, Square& to);
 
+        /**
+         * @brief Checks if opponent has player passed in in check.
+         * 
+         * @param aPlayer the player to check if is in check.
+         * @return true if aPlayer is in check.
+         * @return false if aPlayer is not in check.
+         */
+        bool checkForCheck(Player& aPlayer);
+
 
         /**
          * @brief Returns the color of the piece as a const.

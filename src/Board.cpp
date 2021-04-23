@@ -20,11 +20,15 @@ Board::Board() {
 
 // Square Accessors
 Square& Board::squareAt(int x, int y) const {
+
+    // Not that .at when used on a vector has bound protections.
+    // This should throw 'out_of_range' exception if x or y is out of bounds.
     return *_squares.at(y).at(x);
 }
 
 
 Square& Board::squareAt(std::string location) const {
+
     // translate chars into ints using the nature of char.
     return squareAt(location[0] - 'a', location[1] - '1');
 }
@@ -40,9 +44,12 @@ bool Board::isClearVerticle(Square& from, Square& to) const {
     int upperY = std::max(from.getY(), to.getY());
 
 
-    // Ensure path is clear.
+    // Always start on bottom of the board and go towards the top.
+    // Loop until 'to' is reached, or path is not clear.
     for (int y = lowerY + 1; y < upperY && isClear; y++) {
-        // If a square is occupied path is NOT clear.  
+
+        // check if the square the loop is on is occupied, if so
+        // path is not clear and loop is exited
         if (squareAt(from.getX(), y).occupied()) {
             isClear = false;
         }
@@ -53,16 +60,19 @@ bool Board::isClearVerticle(Square& from, Square& to) const {
 
 
 bool Board::isClearHorizontal(Square& from, Square& to) const {
-    // Ensures path is horizontal.
+    // Ensures path is horizontal by from & to are in the same row.
     bool isClear = from.getY() == to.getY();
 
     // Sets bounds for the loop.
     int leftX = std::min(from.getX(), to.getX());
     int rightX = std::max(from.getX(), to.getX());
 
-    // Ensure path is clear
-    for (int x = leftX + 1; x < rightX && isClear; x++) {
-        // If a square is occupied path is NOT clear.  
+    // Always start on left side of the board and go towards the right.
+    // Loop until 'to' is reached, or path is not clear.
+    for (int x = leftX + 1; (x < rightX && isClear); x++) {
+        
+        // check if the square the loop is on is occupied, if so
+        // path is not clear and loop is exited
         if (squareAt(x, from.getY()).occupied()) {
             isClear = false;
         }
@@ -73,28 +83,48 @@ bool Board::isClearHorizontal(Square& from, Square& to) const {
 
 
 bool Board::isClearDiagonal(Square& from, Square& to) const {
+    // These temp values are an annoyance, but they make life very easy
+    // They allow for checking all directions of diagonols geometry in one line.
     int lowerY = std::min(from.getY(), to.getY());
     int upperY = std::max(from.getY(), to.getY());
     int leftX = std::min(from.getX(), to.getX());
     int rightX = std::max(from.getX(), to.getX());
+
+    // Check geometry
     bool isClear = ((upperY - lowerY) == (rightX - leftX));
 
-    // TODO: Fix this formatting
-    // Ensure path is clear
+    // The following block is CLEVER code. Be careful if you choose to make changes
+    // Brackets scope x to be only valid in the loop.
     {
-    int y = lowerY + 1;
-    for (int x = leftX + 1; (x < rightX && y < upperY) && isClear;x++) {
-        // If a square is occupied path is NOT clear.  
+    // Start with the X that the piece begins at.
+    int x = from.getX();
+
+    // Start with the lower Y ALWAYS, this allows all checks to happen from
+    // top to bottom. If you cahnge this, you must incriment in an if statemnt.
+    // Loop conditions avoids x since they are incrimented syncronously.
+    for (int y = lowerY + 1; (y < upperY && isClear);y++) {
+
+        // Incrimenting occurs before the rest of the code to prevent having
+        // to duplicate this code block outside of the loop. This initial
+        // incrementing/decrementing avoids checking the starting square.
+        // If diagonal goes from left to right, incriment the X
+        if (from.getX() < to.getX()) {
+            x++;
+
+        // If diagonal goes from right to left, decrement the X
+        } else {
+            x--;
+        }
+
+        // Finally, check if the square the loop is on is occupied, if so
+        // path is not clear and loop is exited
         if (squareAt(x, y).occupied()) {
             isClear = false;
         }
-        y++;
+
     }
     }
 
-    // for (std::pair<int, int> indices(leftX + 1, lowerY + 1); indices.first < rightX && isClear; indices.first++ ) {
-
-    // }
     return isClear;
 }
 

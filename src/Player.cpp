@@ -29,26 +29,33 @@ bool Player::makeMove() {
     std::string userMove;
 
 
+    // Loop until a move is made.
     while (!madeMove) {
+
+
         // Prompt user for move and get move string.
         std::cout << getName() << " make move: ";
         getline(std::cin, userMove);
 
-        // validate and attempt move.
+
+        // validate inputted string is 5 or more characters
         if (userMove.length() >= 5) {
+
+            // In try block to catch exception if user inputs bad data.
             try {
-                // TODO: Ask dr. Hansen why these are bad.
                 // Board's vector backing validates squares are on the board.
-                Square& from = Board::getBoard().squareAt(userMove);
+                // Pass in substring of 'move' string to get 'from' and 'to'.
+                Square& from = Board::getBoard().squareAt(userMove.substr(0,2));
                 Square& to = Board::getBoard().squareAt(userMove.substr(3,5));
 
                 // validate 'from' square is occupied.
                 if (from.occupied()) {
 
                     // Ensure player owns piece attempting to move.
-                    if (playersPieces.find(&from.occupiedBy()) != playersPieces.end()) {
+                    if (playersPieces.find(&from.occupiedBy())
+                            != playersPieces.end()) {
 
-                        // Make move.
+                        // Tell piece to make move.
                         madeMove = from.occupiedBy().moveTo(*this, to);
                     }
                 }
@@ -59,6 +66,7 @@ bool Player::makeMove() {
             }
         }
 
+        // Alert user move was invalid if move was not made.
         if (!madeMove) {
             std::cout << "Invalid Move. Try Again." << std::endl;
         }
