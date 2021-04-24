@@ -32,9 +32,11 @@ bool Pawn::moveTo(Player& byPlayer, Square& to) {
         if ((color()[0] == 'W' && to.getY() == 7)
             || (color()[0] == 'B' && to.getY() == 0)) {
 
-                // TODO: Fix this Lurking Bug
-                // Auto set delegate to be queen of this color.
+                // Create new Queen of this color and set delegate to it.
                 _delegate = new Queen(color());
+
+                // Set delegate's location to be the same as this pawn.
+                _delegate->setLocation(&getLocation());
         }
     }
     return moved;

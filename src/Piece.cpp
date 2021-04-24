@@ -86,18 +86,16 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
 bool Piece::checkForCheck(Player& aPlayer) {
     bool inCheck = false;
     Square& kingLocation = aPlayer.getKing().getLocation();
-    // std::cout << "Check for check" << std::endl;
     
 
     for(auto itr = aPlayer.getOpponent().getPieces().cbegin(); !inCheck
         && itr != aPlayer.getOpponent().getPieces().cend(); itr++) {
 
+        // Only check if a piece can move to the king if it is on the board.
         if ((*itr)->isOnBoard()) {
+            
+            // If a piece can move to king, king is in check. Exit loop.
             inCheck = (*itr)->canMoveTo(kingLocation);
-            if (inCheck) {
-                (*itr)->display(std::cout);
-                std::cout << std::endl;
-            }
         }
     }
 
