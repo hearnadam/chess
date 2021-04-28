@@ -47,6 +47,8 @@ bool Pawn::moveTo(Player& byPlayer, Square& to) {
 
 
 
+    // Most of this function could be converted from if/else into boolean.
+    // I chose not to do thise to ensure the code is very verbose.
 bool Pawn::canMoveTo(Square& location) const {
     int xDist;
     int yDist;

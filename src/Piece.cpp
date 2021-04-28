@@ -12,7 +12,6 @@ void Piece::setLocation(Square* square) {
 }
 
 
-// TODO: Rework moveTo
 bool Piece::moveTo(Player& byPlayer, Square& to) {
     bool moved = false;
 
@@ -53,14 +52,9 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
 
         // Validate that this move does not put player's king in check.
         if (byPlayer.inCheck()) {
-            // TODO: Remove
-            std::cout << byPlayer.getName() << " in Check" << std::endl;
 
             // Put back move since player would be in check.
             moved = false;
-        } else {
-            // TODO: Remove
-            std::cout << byPlayer.getName() << "NOT in Check" << std::endl;
         }
 
         // If move failed.
@@ -73,21 +67,6 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
         } else if (toCapture) {
             byPlayer.capture(*toCapture);
         }
-
-        // // If destination was occupied
-        // if(toCapture) {
-
-        //     // Put back opponent's piece that was removed from board.
-        //     if(!moved) {
-        //         to.setOccupier(toCapture);
-        //         oldLocation.setOccupier(this);
-
-
-        //     // Else, move made, capture opponent's piece.
-        //     } else {
-        //         byPlayer.capture(*toCapture);
-        //     }
-        // }
     }
 
     return moved;

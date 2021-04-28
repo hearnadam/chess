@@ -92,7 +92,6 @@ const std::string& Player::getName() const {
 
 
 const int Player::score() const {
-    // TODO: Check Correctness
     int score = 0;
 
     // Loop through all captured pieces and sum.
