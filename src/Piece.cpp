@@ -49,57 +49,48 @@ bool Piece::moveTo(Player& byPlayer, Square& to) {
 
             // Set destination to contain this piece & set this piece's location.
             to.setOccupier(this);
+        }
 
-            // Validate that this move does not put player's king in check.
-            if (checkForCheck(byPlayer)) {
+        // Validate that this move does not put player's king in check.
+        if (byPlayer.inCheck()) {
+            // TODO: Remove
+            std::cout << byPlayer.getName() << " in Check" << std::endl;
 
-                // Put back move since player would be in check.
-                moved = false;
+            // Put back move since player would be in check.
+            moved = false;
+        } else {
+            // TODO: Remove
+            std::cout << byPlayer.getName() << "NOT in Check" << std::endl;
+        }
 
-                if (toCapture) {
-                }
+        // If move failed.
+        if (!moved) {
                 oldLocation.setOccupier(this);
 
+            if (toCapture) {
+                to.setOccupier(toCapture);
             }
-
-            // If destination was occupied
-            if(toCapture) {
-
-                // Put back opponent's piece that was removed from board.
-                if(!moved) {
-                    to.setOccupier(toCapture);
-
-
-                // Else, move made, capture opponent's piece.
-                } else {
-                    byPlayer.capture(*toCapture);
-                }
-            }
-
+        } else if (toCapture) {
+            byPlayer.capture(*toCapture);
         }
+
+        // // If destination was occupied
+        // if(toCapture) {
+
+        //     // Put back opponent's piece that was removed from board.
+        //     if(!moved) {
+        //         to.setOccupier(toCapture);
+        //         oldLocation.setOccupier(this);
+
+
+        //     // Else, move made, capture opponent's piece.
+        //     } else {
+        //         byPlayer.capture(*toCapture);
+        //     }
+        // }
     }
 
     return moved;
-}
-
-
-bool Piece::checkForCheck(Player& aPlayer) {
-    bool inCheck = false;
-    Square& kingLocation = aPlayer.getKing().getLocation();
-    
-
-    for(auto itr = aPlayer.getOpponent().getPieces().cbegin(); !inCheck
-        && itr != aPlayer.getOpponent().getPieces().cend(); itr++) {
-
-        // Only check if a piece can move to the king if it is on the board.
-        if ((*itr)->isOnBoard()) {
-            
-            // If a piece can move to king, king is in check. Exit loop.
-            inCheck = (*itr)->canMoveTo(kingLocation);
-        }
-    }
-
-    return inCheck;
 }
 
 

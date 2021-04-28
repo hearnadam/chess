@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "Square.h"
 #include "Piece.h"
+#include "King.h"
 
 
 Player::Player(std::string name):_name(name), _my_pieces(new std::set<Piece*>()) {}
@@ -32,6 +33,9 @@ bool Player::makeMove() {
     // Loop until a move is made.
     while (!madeMove) {
 
+        if (inCheck()) {
+            std::cout << "In check.";
+        }
 
         // Prompt user for move and get move string.
         std::cout << getName() << " make move: ";
@@ -112,4 +116,21 @@ Player& Player::getOpponent() const {
 
 King& Player::getKing() const {
     return *_my_king;
+}
+
+bool Player::inCheck() {
+    bool isInCheck = false;
+
+    for(auto itr = getOpponent().getPieces().begin(); !isInCheck
+        && itr != getOpponent().getPieces().end(); itr++) {
+
+        // Only check if a piece can move to the king if it is on the board.
+        if ((*itr)->isOnBoard()) {
+
+            // If a piece can move to king, king is in check. Exit loop.
+            isInCheck = (*itr)->canMoveTo(getKing().getLocation());
+        }
+    }
+
+    return isInCheck;
 }

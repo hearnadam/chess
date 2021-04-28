@@ -104,6 +104,15 @@ class Player {
         King& getKing() const;
 
 
+        /**
+         * @brief Checks if opponent has this player in check.
+         * 
+         * @return true if aPlayer is in check.
+         * @return false if aPlayer is not in check.
+         */
+        bool inCheck();
+
+
     private:
         /**
          * @brief Private constructor to prevent compiler from creating a public one.

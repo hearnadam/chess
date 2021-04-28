@@ -7,7 +7,7 @@
 Pawn::Pawn(std::string color):RestrictedPiece(color), _delegate(nullptr) {}
 
 Pawn::~Pawn() {
-    // Delete delegate if it exists.
+    // Delete delegate if it exists when pawn is deleted.
     if (_delegate) {
         delete _delegate;
     }
@@ -27,10 +27,13 @@ void Pawn::setLocation(Square* square) {
 
 bool Pawn::moveTo(Player& byPlayer, Square& to) {
     bool moved = RestrictedPiece::moveTo(byPlayer, to);
-    if (moved) {
-        //  If Pawn reaches color dependant end of board, create delegate.
-        if ((color()[0] == 'W' && to.getY() == 7)
-            || (color()[0] == 'B' && to.getY() == 0)) {
+
+    // If move was successful, and delegate does not exist, then create delegate
+    if (moved && !_delegate) {
+
+        //  If Pawn reaches end of board, create delegate.
+        // Since pawns cannot move backwards, color is irrelevant here.
+        if (to.getY() == 0 || to.getY() == 7) {
 
                 // Create new Queen of this color and set delegate to it.
                 _delegate = new Queen(color());
@@ -51,41 +54,43 @@ bool Pawn::canMoveTo(Square& location) const {
     // Set default return value to be false.
     bool canMove = false;
 
-    // Calculate distances
-    if (color()[0] == 'W') {
-        xDist = location.getX() - getLocation().getX();
-        yDist = location.getY() - getLocation().getY();
-    } else {
-        xDist = getLocation().getX() - location.getX();
-        yDist = getLocation().getY() - location.getY();
-    }
-
-
     // if pawn has delegate, rely on delegate's canMoveTo function.
     if (_delegate) {
         canMove = _delegate->canMoveTo(location);
 
     // Limit pawn movement to be forwards based on color.
-    } else if (yDist == 1 || yDist == 2) {
+    } else {
+        // Calculate distances based on the direction the pawns should move.
+        if (color()[0] == 'W') {
+            xDist = location.getX() - getLocation().getX();
+            yDist = location.getY() - getLocation().getY();
+        } else {
+            xDist = getLocation().getX() - location.getX();
+            yDist = getLocation().getY() - location.getY();
+        }
 
-        // If occupied, limit movement to one diagonal space.
-        if (location.occupied()) {
+        if (yDist == 1 || yDist == 2) {
 
-            // Limit movement to one diagonol space
-            if ((xDist == -1 || xDist == 1) && yDist == 1) {
-                canMove = true;
-            }
+            // If destination is occupied, limit movement to one diagonal space.
+            if (location.occupied()) {
 
-        // Verify path is vertical & clear.
-        } else if (Board::getBoard().isClearVerticle(getLocation(), location)) {
+                // Limit movement to one diagonol space.
+                // Movement can be left or right, hence the absolute value.
+                if (std::abs(xDist) == 1 && yDist == 1) {
+                    canMove = true;
+                }
 
-            // regardless of position allow 1 space movement.
-            if (yDist == 1) {
-                canMove = true;
+            // Verify path is vertical & clear of any pieces in the way.
+            } else if (Board::getBoard().isClearVerticle(getLocation(), location)) {
 
-            // if pawn has not moved, allow 2 space movement.
-            } else if (!hasMoved() && (yDist == 2)) {
-                canMove = true;
+                // regardless of pawn state, allow 1 space movement.
+                if (yDist == 1) {
+                    canMove = true;
+
+                // if pawn has not moved, allow 2 space movement.
+                } else if (!hasMoved() && (yDist == 2)) {
+                    canMove = true;
+                }
             }
         }
     }

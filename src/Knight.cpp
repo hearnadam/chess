@@ -11,7 +11,6 @@ bool Knight::canMoveTo(Square& location) const {
     int yDist = std::abs(getLocation().getY() - location.getY());
     int xDist = std::abs(getLocation().getX() - location.getX());
 
-
     // Ensure movement is in L shape.
     // Potential L: is 1 to the side and 2 forwards or backwards
     // Other Potential L: is 2 to the side and 1 forwards or backwards

@@ -1,7 +1,6 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-class ostream;
 class Piece;
 
 class Square { 

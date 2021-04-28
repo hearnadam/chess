@@ -6,7 +6,7 @@
 #include "Square.h"
 #include "Player.h"
 
-// Piece classess
+// Piece classes
 #include "Queen.h"
 #include "Knight.h"
 #include "Bishop.h"

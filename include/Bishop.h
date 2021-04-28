@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "Piece.h"
-class Location;
 class Square;
 
 

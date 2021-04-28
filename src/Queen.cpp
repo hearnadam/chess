@@ -6,17 +6,13 @@ Queen::Queen(std::string color):Piece(color) {}
 
 
 bool Queen::canMoveTo(Square& location) const {
-    bool canMove = false;
 
-    if (Board::getBoard().isClearVerticle(getLocation(), location)) {
-        canMove = true;
-    } else if (Board::getBoard().isClearVerticle(getLocation(), location)) {
-        canMove = true;
-    } else if (Board::getBoard().isClearDiagonal(getLocation(), location)) {
-        canMove = true;
-    }
-
-    return canMove;
+    // Queen can move in any line, verticle, horizontal, or diagonal.
+    // C++ lazy execution should only require the 2nd function to be called
+    // if the first is false, and so on.
+    return Board::getBoard().isClearVerticle(getLocation(), location)
+            || Board::getBoard().isClearHorizontal(getLocation(), location)
+            || Board::getBoard().isClearDiagonal(getLocation(), location);
 }
 
 
@@ -26,5 +22,7 @@ const int Queen::value() const {
 
 
 void Queen::display(std::ostream& outStream) const {
+
+    // Display Queen color, then symbol.
     outStream << Piece::color()[0] << "Q";
 }
